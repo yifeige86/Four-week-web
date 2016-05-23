@@ -31,13 +31,13 @@ $(document).ready(function() {
 displayoption =sessionStorage.getItem("option");
 
 switch (displayoption){
-    case 1:
+    case "1":
         displayAll(); //option 1 to display all
         break;
-    case 2:
+    case "2":
         displayByCategory();
         break;
-    case 3:
+    case "3":
         displayByProduct();
         break;
     default:
@@ -46,14 +46,16 @@ switch (displayoption){
 
 //function that displays all categories/products
 function displayAll(){
+    console.log("1: ", "option 1 hit");
     postRef.on("child_added",function(snapshot){
-            var newPost = productSnapshot.val();
+            var newPost = snapshot.val();
             Price = newPost.Amount;
             Title = newPost.Title;
             imgCode = newPost.image;
-            key = productSnapshot.key();
+            key = snapshot.key();
             count++;
             populatePosts();
+
     });
 
 }
@@ -61,6 +63,7 @@ function displayAll(){
 
 
 function displayByCategory(){
+    console.log("2: ", "option 2 hit");
     //read the selected category
     selectedCategory = sessionStorage.getItem("category");
     //query the database to retrieve only the category
@@ -69,14 +72,14 @@ function displayByCategory(){
             Price = newPost.Amount;
             Title = newPost.Title;
             imgCode = newPost.image;
-            key = productSnapshot.key();
+            key = snapshot.key();
             count++;
             populatePosts();
     });
 }
 
 function displayByProduct(){
-
+    console.log("3: ", "option 3 hit");
     selectedCity = sessionStorage.getItem("city");
     selectedProduct = sessionStorage.getItem("product");
 
