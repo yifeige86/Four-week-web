@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Required meta tags always come first -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+
+    <!--Firebase -->
+    <script src="https://cdn.firebase.com/js/client/2.4.2/firebase.js"></script>
+
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.2/css/bootstrap.min.css" integrity="sha384-y3tfxAZXuh4HwSYylfB+J125MxIs6mR5FOHamPBG064zB+AFeWH94NdvaCBm8qnd" crossorigin="anonymous">
+
+    <!--Customized CSS -->
+    <link rel="stylesheet" type="text/css" href="index.css">
+
+
+</head>
+
+<body>
+
+
+<!-- header-->
+<header class="container" id="HomepageHeader">
+    <div class="row">
+        <h1 class="col-sm-8">Rent It</h1>
+        <nav class="col-sm-4">
+            <p>Categories</p>
+            <p>About</p>
+            <p>Help</p>
+            <p>Contact</p>
+            <button type="button" class="btn btn-secondary btn-sm" data-toggle="modal" data-target="#loginModal"> Login</button>
+        </nav>
+    </div>
+</header>
+
+
+<!-- Jumbotron-->
+
+<section class="jumbotron" id="startPageunauth">
+    <div class="container">
+        <div class="row" align="center">
+            <h2>Electronics for rent</h2>
+            <h3>Login and Post your item for rent</h3>
+        </div>
+
+        <!--search Bar-->
+
+        <form class="form-inline" align="center">
+            <div class="form-group">
+                <label class="sr-only" for="productInput">Product</label>
+                <input type="text" class="form-control" id="productInput" placeholder="What product?">
+            </div>
+            <div class="form-group">
+                <label class="sr-only" for="cityInput">City </label>
+                <input type="text" class="form-control" id="cityInput" placeholder="Which city?">
+            </div>
+            <div class="form-group">
+                <label  class="sr-only" for="startDateInput">Start Date </label>
+                <input type="text" class="form-control" id="startDateInput" placeholder="Start Date" onfocus="(this.type='date')">
+            </div>
+
+            <div class="form-group">
+                <label  class="sr-only" for="endDateInput">End Date </label>
+                <input type="text" class="form-control" id="endDateInput" placeholder="End Date" onfocus="(this.type='date')">
+            </div>
+
+            <button type="submit" class="btn btn-primary" onclick="passSearch()">Search Electronics</button>
+        </form> <!--end of search bar-->
+    </div>
+</section><!--end of  Jumbotron-->
+
+<!-- Login Modal -->
+<div id="loginModal" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h2 class="modal-title" align="center">Login or Sign up</h2>
+            </div>
+            <div class="modal-body">
+                <img src="http://www.playtimeparis.com/images/exposer/logo-login.png" class="img-rounded center-block" height="250px">
+                <div class="form-group row">
+                    <label for="loginEmail" class="col-sm-2 form-control-label">Email</label>
+                    <div class="col-sm-10">
+                        <input type="text" class="form-control" id="loginEmail" placeholder="Email">
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="loginPass" class="col-sm-2 form-control-label">Password</label>
+                    <div class="col-sm-10">
+                        <input type="password" class="form-control" id="loginPass" placeholder="Password">
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" id="signinBtn" class="btn btn-primary btn-lg btn-block" onclick="loginUser()" >Sign In</button>
+                <button type="button" id="registerBtn" class="btn btn-secondary btn-lg btn-block" data-toggle="modal" data-target="#RegistrationModal" data-dismiss="modal">Sign Up</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!--Registration Modal -->
+<div id="RegistrationModal" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h2 class="modal-title" align="center">Registration</h2>
+            </div>
+            <div class="modal-body">
+                <img src="https://edem-egov.org/images/form_grant.png" class="img-rounded center-block" height=150px">
+                <div class="form-group row">
+                    <label for="registerName" class="col-sm-2 form-control-label">Full name</label>
+                    <div class="col-sm-10">
+                        <input type="text" class="form-control" id="registerName" placeholder="Full name">
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="registerEmail" class="col-sm-2 form-control-label">Email</label>
+                    <div class="col-sm-10">
+                        <input type="email" class="form-control" id="registerEmail" placeholder="E-mail">
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="registerPassword" class="col-sm-2 form-control-label">Password</label>
+                    <div class="col-sm-10">
+                        <input type="password" class="form-control" id="registerPassword" placeholder="Password">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label  class="sr-only" for="registerBday">Date of birth </label>
+                    <input type="text" class="form-control" id="registerBday" placeholder="Date of birth" onfocus="(this.type='date')">
+                </div>
+
+                <div class="form-group">
+                    <select class="c-select" id="registerGender">
+                        <option selected>Choose your gender</option>
+                        <option value="Man">Man</option>
+                        <option value="Woman">Woman</option>
+                    </select>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary btn-lg btn-block" onclick="createUsers(), userDetails()">Register</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+<!--Publish Post Modal -->
+<div id="ItemModal" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h2 class="modal-title" align="center">Post an Item</h2>
+            </div>
+            <div class="modal-body">
+                <img src="https://image.freepik.com/free-vector/gadget-collection-in-flat-design_1026-48.jpg" class="img-rounded center-block" height="300px">
+                <div class="form-group">
+                    <select class="c-select col-sm-12" id="postCategory">
+                        <option selected>Category</option>
+                        <option value="Studio">Studio</option>
+                        <option value="Cinematography">Cinematography</option>
+                        <option value="Computers & laptops">Computers & laptops</option>
+                        <option value="Gaming consoles">Gaming console</option>
+                    </select>
+                </div>
+
+                <div class="form-group row" >
+                    <label for="postTitle" class="col-sm-2 form-control-label"></label>
+                    <div class="col-sm-12">
+                        <input type="text" class="form-control" id="postTitle" placeholder="Post Title">
+                    </div>
+                </div>
+
+                <div class="form-group row" >
+                    <label for="postProduct" class="col-sm-2 form-control-label"></label>
+                    <div class="col-sm-12">
+                        <input type="text" class="form-control" id="postProduct" placeholder="What Product?">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="sr-only" for="postPrice">Price per day (in DKK)</label>
+                    <div class="input-group">
+                        <input type="text" class="form-control" id="postPrice" placeholder="Price per day">
+                        <div class="input-group-addon">DKK</div>
+                    </div>
+                </div>
+
+                <div class="form-group row" >
+                    <label for="postCity" class="col-sm-2 form-control-label"></label>
+                    <div class="col-sm-12">
+                        <input type="text" class="form-control" id="postCity" placeholder="Please enter city name">
+                    </div>
+                </div>
+
+                <div class="form-group" >
+                    <label  class="sr-only" for="postStartDate">First available date </label>
+                    <input type="text" class="form-control" id="postStartDate" placeholder="First Available date" onfocus="(this.type='date')">
+                </div>
+
+                <div class="form-group" >
+                    <label  class="sr-only" for="postEndDate">First available date </label>
+                    <input type="text" class="form-control" id="postEndDate" placeholder="Last Available date" onfocus="(this.type='date')">
+                </div>
+
+                <fieldset class="form-group">
+                    <label for="postDescription"></label>
+                    <textarea class="form-control" id="postDescription" rows="4" placeholder="Description"></textarea>
+                </fieldset>
+                <input id="inp" type='file'>
+                <img id="postImg" height="100px" width="100px">
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary btn-lg btn-block" onclick="CreatePost()">Publish It!</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--Four categories-->
+<section class="container">
+    <div class="row">
+        <div class="col-sm-6">
+            <p id="Studio">Studio</p>
+                <img onclick="selectedCategory('Studio')" src="http://static1.squarespace.com/static/54bc112ee4b0b6572f88bde9/t/55b8b5c3e4b0968d53119aab/1438168517090/"
+                     width="128" height="300" >
+        </div>
+        <div class="col-sm-6">
+            <p id ="Cinematography">Cinematography</p>
+            <a href="#">
+                <img onclick="selectedCategory('Cinematography')" src="http://pbblogassets.s3.amazonaws.com/uploads/2015/11/Cinematography-Manual-865x505.jpg"
+                     width="128" height="300">
+            </a>
+        </div>
+        <div class="col-sm-6">
+            <p id="Computers & laptops">Computers & laptops</p>
+                <img onclick="selectedCategory('Computers & laptops')" src="https://tctechcrunch2011.files.wordpress.com/2015/04/macbook-front.jpg?w=1279&h=727&crop=1"
+                     width="128" height="300">
+        </div>
+        <div class="col-sm-6">
+            <p id="Gaming consoles">Gaming consoles</p>
+                <img onclick="selectedCategory('Gaming consoles')" src="http://sites.duke.edu/lit80s_02_f2013_augrealities/files/2013/12/gaymers.jpg"
+                     width="128" height="300">
+        </div>
+    </div>
+    <div class="row" align="center">
+        <a class="btn btn-secondary" onclick="allCategories()">View Complete Catalogue</a>
+    </div>
+</section>
+
+
+<!-- footer-->
+<footer class="container">
+    <div class="row">
+        <p class="col-sm-4">&copy; 2016 Safee & Yifei Productions</p>
+        <ul class="col-sm-8">
+            <li class="col-sm-1">
+                <img src="https://s3.amazonaws.com/codecademy-content/projects/make-a-website/lesson-4/twitter.svg" href="">
+            </li>
+            <li class="col-sm-1">
+                <img src="https://s3.amazonaws.com/codecademy-content/projects/make-a-website/lesson-4/facebook.svg" href="">
+            </li>
+            <li class="col-sm-1">
+                <img src="https://s3.amazonaws.com/codecademy-content/projects/make-a-website/lesson-4/instagram.svg" href="">
+            </li>
+            <li class="col-sm-1">
+                <img src="https://s3.amazonaws.com/codecademy-content/projects/make-a-website/lesson-4/medium.svg" href="">
+            </li>
+        </ul>
+    </div>
+</footer>
+
+
+
+
+
+<!-- jQuery first, then Bootstrap JS and customized JS -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.2/js/bootstrap.min.js" integrity="sha384-vZ2WRJMwsjRMW/8U7i6PWi6AlO1L79snBrmgiDpgIWJ82z8eA5lenwvxbMV1PAh7" crossorigin="anonymous"></script>
+<script src="index.js"></script>
+</body>
+</html>

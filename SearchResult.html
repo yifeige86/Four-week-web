@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Required meta tags always come first -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+
+    <!--Firebase -->
+    <script src="https://cdn.firebase.com/js/client/2.4.2/firebase.js"></script>
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.2/css/bootstrap.min.css" integrity="sha384-y3tfxAZXuh4HwSYylfB+J125MxIs6mR5FOHamPBG064zB+AFeWH94NdvaCBm8qnd" crossorigin="anonymous">
+
+    <!--Customized CSS -->
+    <link rel="stylesheet" type="text/css" href="index.css">
+</head>
+
+<body>
+
+<!-- header-->
+<header class="container" id="SearchResultHeader">
+    <div class="row">
+        <h1 class="col-sm-8">Rent It</h1>
+        <nav class="col-sm-4">
+            <p>Categories</p>
+            <p>About</p>g
+            <p>Help</p>
+            <p>Contact</p>
+            <button type="button" class="btn btn-secondary btn-sm" data-toggle="modal" data-target="#loginModal"> Login</button>
+        </nav>
+    </div>
+</header>
+
+
+<!-- Login Modal -->
+<div id="loginModal" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h2 class="modal-title" align="center">Login or Sign up</h2>
+            </div>
+            <div class="modal-body">
+                <img src="http://www.playtimeparis.com/images/exposer/logo-login.png" class="img-rounded center-block" height="250px">
+                <div class="form-group row">
+                    <label for="loginEmail" class="col-sm-2 form-control-label">Email</label>
+                    <div class="col-sm-10">
+                        <input type="text" class="form-control" id="loginEmail" placeholder="Email">
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="loginPass" class="col-sm-2 form-control-label">Password</label>
+                    <div class="col-sm-10">
+                        <input type="password" class="form-control" id="loginPass" placeholder="Password">
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" id="signinBtn" class="btn btn-primary btn-lg btn-block" onclick="loginUser()" >Sign In</button>
+                <button type="button" id="registerBtn" class="btn btn-secondary btn-lg btn-block" data-toggle="modal" data-target="#RegistrationModal" data-dismiss="modal">Sign Up</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!--Registration Modal -->
+<div id="RegistrationModal" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h2 class="modal-title" align="center">Registration</h2>
+            </div>
+            <div class="modal-body">
+                <img src="https://edem-egov.org/images/form_grant.png" class="img-rounded center-block" height=150px">
+                <div class="form-group row">
+                    <label for="registerName" class="col-sm-2 form-control-label">Full name</label>
+                    <div class="col-sm-10">
+                        <input type="text" class="form-control" id="registerName" placeholder="Full name">
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="registerEmail" class="col-sm-2 form-control-label">Email</label>
+                    <div class="col-sm-10">
+                        <input type="email" class="form-control" id="registerEmail" placeholder="E-mail">
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="registerPassword" class="col-sm-2 form-control-label">Password</label>
+                    <div class="col-sm-10">
+                        <input type="password" class="form-control" id="registerPassword" placeholder="Password">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label  class="sr-only" for="registerBday">Date of birth </label>
+                    <input type="text" class="form-control" id="registerBday" placeholder="Date of birth" onfocus="(this.type='date')">
+                </div>
+
+                <div class="form-group">
+                    <select class="c-select" id="registerGender">
+                        <option selected>Choose your gender</option>
+                        <option value="Man">Man</option>
+                        <option value="Woman">Woman</option>
+                    </select>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary btn-lg btn-block" onclick="createUsers(), userDetails()">Register</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<form class="form-inline" align=center>
+    <div class="form-group">
+        <label class="sr-only" for="productInput">Product</label>
+        <input type="text" class="form-control" id="productInput" placeholder="What product?">
+    </div>
+    <div class="form-group">
+        <label class="sr-only" for="cityInput">City</label>
+        <input type="text" class="form-control" id="cityInput" placeholder="Which city?">
+    </div>
+    <div class="form-group">
+        <label class="sr-only" for="startDateInput">StartDate</label>
+        <input type="text" class="form-control" id="startDateInput" placeholder="StartDate" onfocus="(this.type='date')">
+    </div>
+    <div class="form-group">
+        <label class="sr-only" for="endDateInput">EndDate</label>
+        <input type="text" class="form-control" id="endDateInput" placeholder="EndDate" onfocus="(this.type='date')">
+    </div>
+    <button type="button" class="btn btn-primary" onclick="passSearch()">SearchElectronics</button>
+</form>
+
+<h2>Explore Electronics</h2>
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-6 ">
+            <div id= "postContainer" class="row">
+                <div id = "postFigureLeft"class="col-md-6 ">
+                    <figure id ="postFigure1" class="figure sr-only">
+                        <img id= "image" data-src="..." class="figure-img img-fluid img-rounded" alt="Price goes here.">
+                        <div class="carousel-caption">
+                            Insert your text here !
+                        </div>
+                        <figcaption id="figCaption" class="figure-caption">A caption for the above image.</figcaption>
+                    </figure>
+                </div>
+
+                <div  id = "postFigureRight" class="col-md-6 ">
+
+                </div>
+
+
+            </div>
+        </div>
+        <div  class="col-md-6">
+                <div id="googleMap" style="height:600px;"></div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+
+<!-- jQuery first, then Bootstrap JS. -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.2/js/bootstrap.min.js" integrity="sha384-vZ2WRJMwsjRMW/8U7i6PWi6AlO1L79snBrmgiDpgIWJ82z8eA5lenwvxbMV1PAh7" crossorigin="anonymous"></script>
+<!--Google Map API-->
+<script src="https://maps.googleapis.com/maps/api/js?callback=initMap"
+        async defer></script>
+<script src="searchResult.js"></script>
+</body>
+</html>

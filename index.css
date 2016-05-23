@@ -1,0 +1,192 @@
+body {
+    font-family: 'Roboto', sans-serif;
+    font-weight: 300;
+}
+
+header {
+    padding: 10px 0;
+}
+
+header .row,
+footer .row {
+    display: flex;
+    align-items: center;
+}
+
+header h1 {
+    font-weight: 700;
+    margin: 0;
+}
+
+header nav {
+    display: flex;
+    justify-content: flex-end;
+}
+
+header p {
+    padding: 0 20px;
+    margin: 0;
+}
+
+.jumbotron {
+    display: flex;
+    align-items: center;
+    background-image: url('http://www.psicases.com/blog/wp-content/uploads/Electronic-Cases.jpg');
+    background-size: cover;
+    color: #ffffff;
+    height: 500px;
+    text-shadow: 0.25px 0.25px 0.25px #000000;
+}
+.loginLayout{
+    align-items: center;
+    background-image: url('http://www.playtimeparis.com/images/exposer/logo-login.png');
+    background-size: cover;
+    color: #ffffff;
+    text-shadow: 0.25px 0.25px 0.25px #000000;
+}
+
+.jumbotron h2 {
+    font-size: 60px;
+    font-weight: 700;
+    position: relative;;
+    top: 0px;
+    margin: 0;
+    color: #fff;
+    border: 10px;
+}
+
+.jumbotron h3 {
+    margin: 0 0 20px;
+    position: relative;
+    top: 330px;
+    color: #fff;
+}
+
+section .row img {
+    margin: 0 0 30px;
+    width: 100%;
+    border: 20px solid #000000;
+}
+
+.col-md-6 {
+    margin: 0 0 30px;
+}
+
+.btn.btn-primary {
+    border-radius: 2px;
+    border: 0px;
+    color: white;
+    text-shadow: none;
+    background-color: #132885;
+}
+
+.btn.btn-primary:hover {
+    color: white;
+    background-color: #7D8BCB;
+}
+
+.btn-secondary {
+    background-color: #132885;
+    color: white;
+    margin: 0 0 30px;
+}
+
+footer {
+    font-size: 12px;
+    padding: 20px 0;
+}
+
+footer .col-sm-8 {
+    display: flex;
+    justify-content: flex-end;
+}
+
+footer ul {
+    list-style: none;
+}
+
+footer li img {
+    width: 32px;
+    height: 32px;
+}
+.contact-btn a {
+    margin-right: 10px;
+    padding: 8px 18px;
+
+}
+
+.contact-btn a:active {
+    position: relative;
+    bottom: 2px;
+}
+
+.login-btn a{
+    margin-right: 5px;
+    padding: 4px 14px;
+    border: 2px solid #204156;
+}
+.login-btn a :active {
+    position: relative;
+    bottom: 2px;
+}
+.nameAndpassword{
+    align-items: center;
+    bottom: 2px;
+}
+.postBtn a{
+    margin-right: 75px;
+    position: relative;
+    padding: 4px 9px;
+    border: 2px solid #204156;
+}
+.postBtn a :active{
+    position: relative;
+    bottom: 2px;
+}
+IMG.displayed {
+    display: block;
+    margin-left: auto;
+    margin-right: auto
+}
+
+.button {
+    display: block;
+    border-radius: 100px;
+    background-color: #121285;
+    border: 1px;
+    color: #FFFFFF;
+    text-align: center;
+    font-size: 20px;
+    padding: 10px;
+    width: 200px;
+    transition: all 0.5s;
+    cursor: pointer;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 290px;
+}
+
+.button span {
+    cursor: pointer;
+    display: inline-block;
+    position: relative;
+    transition: 0.5s;
+}
+
+.button span:after {
+    content: '»';
+    position: absolute;
+    opacity: 0;
+    top: 0;
+    right: -20px;
+    transition: 0.5s;
+}
+
+.button:hover span {
+    padding-right: 25px;
+}
+
+.button:hover span:after {
+    opacity: 1;
+    right: 0;
+}
